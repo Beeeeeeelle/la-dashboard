@@ -1,0 +1,468 @@
+bplist00�_WebMainResource�	
+^WebResourceURL_WebResourceTextEncodingName_WebResourceData_WebResourceMIMEType_WebResourceFrameName_5file:///Users/belleli/Downloads/dashboard_mockup.htmlUUTF-8Oz�<!DOCTYPE html><html lang="en"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LA Dashboard Annotation Sheet</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: Arial, sans-serif;
+    background: #f0f4f9;
+    padding: 32px 24px;
+    color: #1a1a2e;
+  }
+
+  .page {
+    max-width: 860px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+    overflow: hidden;
+  }
+
+  /* ── Header ── */
+  .page-header {
+    background: #1B3A6B;
+    padding: 24px 32px 20px;
+  }
+  .page-header h1 {
+    color: white;
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    margin-bottom: 4px;
+  }
+  .page-header p {
+    color: #a8c4e8;
+    font-size: 12px;
+  }
+
+  /* ── Legend bar ── */
+  .legend {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border-bottom: 1px solid #dde4ef;
+  }
+  .legend-item {
+    padding: 10px 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    font-weight: 600;
+    border-right: 1px solid #dde4ef;
+  }
+  .legend-item:last-child { border-right: none; }
+  .legend-item .dot {
+    width: 18px; height: 18px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 10px;
+  }
+  .l-green { background: #e8f5e9; color: #2e7d32; }
+  .l-green .dot { background: #2e7d32; }
+  .l-yellow { background: #fff8e1; color: #856404; }
+  .l-yellow .dot { background: #f9a825; }
+  .l-red { background: #fdecea; color: #7d2020; }
+  .l-red .dot { background: #c62828; }
+  .l-star { background: #fff3e0; color: #7b4c00; }
+  .l-star .dot { background: #e65100; font-size: 11px; }
+
+  /* ── Body ── */
+  .body { padding: 24px 32px 32px; }
+
+  .instruction {
+    background: #f0f4fb;
+    border-left: 4px solid #2E5FA3;
+    padding: 10px 14px;
+    font-size: 12px;
+    color: #2E5FA3;
+    margin-bottom: 24px;
+    border-radius: 0 6px 6px 0;
+    font-style: italic;
+  }
+
+  /* ── Two-column table ── */
+  .indicator-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    margin-bottom: 28px;
+  }
+
+  /* Group header row */
+  .group-header td {
+    background: #1B3A6B;
+    color: white;
+    font-weight: 700;
+    font-size: 13px;
+    padding: 8px 14px;
+    letter-spacing: 0.3px;
+  }
+  .group-header .group-sub {
+    font-size: 10px;
+    font-weight: 400;
+    color: #a8c4e8;
+    display: block;
+    margin-top: 2px;
+    font-style: italic;
+  }
+
+  /* Column headers */
+  .col-header td {
+    background: #2E5FA3;
+    color: white;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 6px 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .col-header .annotation-cols {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+  }
+  .col-header .annotation-cols span {
+    text-align: center;
+    font-size: 10px;
+  }
+
+  /* Indicator rows */
+  .indicator-row td {
+    padding: 7px 14px;
+    border-bottom: 1px solid #e8edf5;
+    vertical-align: middle;
+  }
+  .indicator-row:last-child td { border-bottom: none; }
+  .indicator-row:nth-child(even) td { background: #f7f9fd; }
+  .indicator-row:hover td { background: #eef3fb; }
+
+  .indicator-name {
+    width: 55%;
+    font-size: 13px;
+    color: #1B3A6B;
+  }
+  .indicator-name .badge {
+    display: inline-block;
+    font-size: 9px;
+    background: #fff3e0;
+    color: #7b4c00;
+    border: 1px solid #f9a825;
+    border-radius: 3px;
+    padding: 1px 5px;
+    margin-left: 6px;
+    font-style: italic;
+    vertical-align: middle;
+  }
+
+  .annotation-cells {
+    width: 45%;
+  }
+  .annotation-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 4px;
+  }
+  .ann-box {
+    height: 26px;
+    border-radius: 4px;
+    border: 1.5px dashed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s;
+    user-select: none;
+  }
+  .ann-box:hover { opacity: 0.7; transform: scale(1.05); }
+
+  .ann-green  { border-color: #2e7d32; color: #2e7d32; background: #f1f8f1; }
+  .ann-yellow { border-color: #f9a825; color: #856404; background: #fffdf0; }
+  .ann-red    { border-color: #c62828; color: #7d2020; background: #fff5f5; }
+  .ann-star   { border-color: #e65100; color: #7b4c00; background: #fff9f0; }
+
+  .ann-box.active-green  { background: #2e7d32; color: white; border-style: solid; }
+  .ann-box.active-yellow { background: #f9a825; color: white; border-style: solid; }
+  .ann-box.active-red    { background: #c62828; color: white; border-style: solid; }
+  .ann-box.active-star   { background: #e65100; color: white; border-style: solid; }
+
+  /* Wish item rows */
+  .wish-row td {
+    padding: 7px 14px;
+    border-bottom: 1px solid #e8edf5;
+  }
+  .wish-input {
+    width: 100%;
+    border: none;
+    border-bottom: 1.5px dashed #e65100;
+    background: transparent;
+    font-size: 12px;
+    color: #7b4c00;
+    font-style: italic;
+    padding: 2px 4px;
+    outline: none;
+  }
+  .wish-input::placeholder { color: #d4a070; }
+
+  /* section spacer */
+  .section-gap { height: 8px; }
+
+  /* ── Footer ── */
+  .page-footer {
+    border-top: 1px solid #dde4ef;
+    padding: 12px 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 11px;
+    color: #888;
+    background: #f7f9fd;
+  }
+  .participant-id {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    color: #555;
+  }
+  .participant-id input {
+    border: none;
+    border-bottom: 1px solid #aaa;
+    background: transparent;
+    width: 120px;
+    font-size: 11px;
+    outline: none;
+    padding: 1px 4px;
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- Header -->
+  <div class="page-header">
+    <h1>Learning Analytics — Dashboard Annotation Sheet</h1>
+    <p>For each indicator, mark your response using the four codes below. You may mark more than one code per indicator.</p>
+  </div>
+
+  <!-- Legend -->
+  <div class="legend">
+    <div class="legend-item l-green"><div class="dot"></div> GREEN — I use this</div>
+    <div class="legend-item l-yellow"><div class="dot"></div> YELLOW — I've seen it but unsure how to use</div>
+    <div class="legend-item l-red"><div class="dot"></div> RED — I ignore / don't understand</div>
+    <div class="legend-item l-star"><div class="dot">★</div> STAR — I wish I had this</div>
+  </div>
+
+  <!-- Body -->
+  <div class="body">
+
+    <div class="instruction">
+      Think out loud as you annotate — tell me what you notice, what's familiar, and what surprises you. There are no right or wrong answers.
+    </div>
+
+    <table class="indicator-table">
+
+      <!-- ① Student Activity -->
+      <tbody><tr class="group-header">
+        <td colspan="2">① Student Activity Metrics <span class="group-sub">How students move through and engage with the course environment</span></td>
+      </tr>
+      <tr class="col-header">
+        <td style="width:55%">Indicator</td>
+        <td style="width:45%">
+          <div class="annotation-cols">
+            <span>🟢 Use</span><span>🟡 Unsure</span><span>🔴 Ignore</span><span>★ Wish</span>
+          </div>
+        </td>
+      </tr>
+      <tr class="indicator-row"><td class="indicator-name">Weekly login frequency</td><td class="annotation-cells"><div class="annotation-grid"><div class="ann-box ann-green" onclick="toggle(this)">G</div><div class="ann-box ann-yellow active-yellow" onclick="toggle(this)">Y</div><div class="ann-box ann-red" onclick="toggle(this)">R</div><div class="ann-box ann-star" onclick="toggle(this)">★</div></div></td></tr>
+      <tr class="indicator-row"><td class="indicator-name">Last login date / time</td><td class="annotation-cells"><div class="annotation-grid"><div class="ann-box ann-green" onclick="toggle(this)">G</div><div class="ann-box ann-yellow" onclick="toggle(this)">Y</div><div class="ann-box ann-red" onclick="toggle(this)">R</div><div class="ann-box ann-star" onclick="toggle(this)">★</div></div></td></tr>
+      <tr class="indicator-row"><td class="indicator-name">Average session duration</td><td class="annotation-cells"><div class="annotation-grid"><div class="ann-box ann-green" onclick="toggle(this)">G</div><div class="ann-box ann-yellow" onclick="toggle(this)">Y</div><div class="ann-box ann-red" onclick="toggle(this)">R</div><div class="ann-box ann-star" onclick="toggle(this)">★</div></div></td></tr>
+      <tr class="indicator-row"><td class="indicator-name">Total weekly time-on-course</td><td class="annotation-cells"><div class="annotation-grid"><div class="ann-box ann-green" onclick="toggle(this)">G</div><div class="ann-box ann-yellow" onclick="toggle(this)">Y</div><div class="ann-box ann-red" onclick="toggle(this)">R</div><div class="ann-box ann-star" onclick="toggle(this)">★</div></div></td></tr>
+      <tr class="indicator-row"><td class="indicator-name">Pages viewed per session</td><td class="annotation-cells"><div class="annotation-grid"><div class="ann-box ann-green" onclick="toggle(this)">G</div><div class="ann-box ann-yellow" onclick="toggle(this)">Y</div><div class="ann-box ann-red" onclick="toggle(this)">R</div><div class="ann-box ann-star" onclick="toggle(this)">★</div></div></td></tr>
+      <tr class="indicator-row"><td class="indicator-name">Click path sequence <span class="badge">advanced</span></td><td class="annotation-cells"><div class="annotation-grid"><div class="ann-box ann-green" onclick="toggle(this)">G</div><div class="ann-box ann-yellow" onclick="toggle(this)">Y</div><div class="ann-box ann-red" onclick="toggle(this)">R</div><div class="ann-box ann-star" onclick="toggle(this)">★</div></div></td></tr>
+
+      <tr class="section-gap"><td colspan="2"></td></tr>
+
+      <!-- ② Grade Analytics -->
+      <tr class="group-header">
+        <td colspan="2">② Grade Analytics <span class="group-sub">Performance data at individual and course level</span></td>
+      </tr>
+      <tr class="col-header">
+        <td>Indicator</td>
+        <td><div class="annotation-cols"><span>🟢 Use</span><span>🟡 Unsure</span><span>🔴 Ignore</span><span>★ Wish</span></div></td>
+      </tr>
+      <tr class="indicator-row"><td class="indicator-name">Individual assignment score</td><td class="annotation-cells"><div class="annotation-grid"><div class="ann-box ann-green" onclick="toggle(this)">G</div><div class="ann-box ann-yellow" onclick="toggle(this)">Y</div><div class="ann-box ann-red" onclick="toggle(this)">R</div><div class="ann-box ann-star" onclick="toggle(this)">★</div></div></td></tr>
+      <tr class="indicator-row"><td class="indicator-name">Class-wide score distribution</td><td class="annotation-cells"><div class="annotation-grid"><div class="ann-box ann-green" onclick="toggle(this)">G</div><div class="ann-box ann-yellow" onclick="toggle(this)">Y</div><div class="ann-box ann-red" onclick="toggle(this)">R</div><div class="ann-box ann-star" onclick="toggle(this)">★</div></div></td></tr>
+      <tr class="indicator-row"><td class="indicator-name">Student grade trend over time</td><td class="annotation-cells"><div class="annotation-grid"><div class="ann-box ann-green" onclick="toggle(this)">G</div><div class="ann-box ann-yellow" onclick="toggle(this)">Y</div><div class="ann-box ann-red" onclick="toggle(this)">R</div><div class="ann-box ann-star" onclick="toggle(this)">★</div></div></td></tr>
+      <tr class="indicator-row"><td class="indicator-name">Pass / fail rate</td><td class="annotation-cells"><div class="annotation-grid"><div class="ann-box ann-green" onclick="toggle(this)">G</div><div class="ann-box ann-yellow" onclick="toggle(this)">Y</div><div class="ann-box ann-red" onclick="toggle(this)">R</div><div class="ann-box ann-star" onclick="toggle(this)">★</div></div></td></tr>
+      <tr class="indicator-row"><td class="indicator-name">Average score per assignment</td><td class="annotation-cells"><div class="annotation-grid"><div class="ann-box ann-green" onclick="toggle(this)">G</div><div class="ann-box ann-yellow" onclick="toggle(this)">Y</div><div class="ann-box ann-red" onclick="toggle(this)">R</div><div class="ann-box ann-star" onclick="toggle(this)">★</div></div></td></tr>
+      <tr class="indicator-row"><td class="indicator-name">Score comparison across sections / semesters</td><td class="annotation-cells"><div class="annotation-grid"><div class="ann-box ann-green" onclick="toggle(this)">G</div><div class="ann-box ann-yellow" onclick="toggle(this)">Y</div><div class="ann-box ann-red" onclick="toggle(this)">R</div><div class="ann-box ann-star" onclick="toggle(this)">★</div></div></td></tr>
+
+      <tr class="section-gap"><td colspan="2"></td></tr>
+
+      <!-- ③ Discussion Analytics -->
+      <tr class="group-header">
+        <td colspan="2">③ Discussion Analytics <span class="group-sub">Social and communicative engagement in online discussions</span></td>
+      </tr>
+      <tr class="col-header">
+        <td>Indicator</td>
+        <td><div class="annotation-cols"><span>🟢 Use</span><span>🟡 Unsure</span><span>🔴 Ignore</span><span>★ Wish</span></div></td>
+      </tr>
+      <tr class="indicator-row"><td class="indicator-name">Total posts per student</td><td class="annotation-cells"><div class="annotation-grid"><div class="ann-box ann-green" onclick="toggle(this)">G</div><div class="ann-box ann-yellow" onclick="toggle(this)">Y</div><div class="ann-box ann-red" onclick="toggle(this)">R</div><div class="ann-box ann-star" onclick="toggle(this)">★</div></div></td></tr>
+      <tr class="indicator-row"><td class="indicator-name">Reply count / thread depth</td><td class="annotation-cells"><div class="annotation-grid"><div class="ann-box ann-green" onclick="toggle(this)">G</div><div class="ann-box ann-yellow" onclick="toggle(this)">Y</div><div class="ann-box ann-red" onclick="toggle(this)">R</div><div class="ann-box ann-star" onclick="toggle(this)">★</div></div></td></tr>
+      <tr class="indicator-row"><td class="indicator-name">Average word count per post</td><td class="annotation-cells"><div class="annotation-grid"><div class="ann-box ann-green" onclick="toggle(this)">G</div><div class="ann-box ann-yellow" onclick="toggle(this)">Y</div><div class="ann-box ann-red" onclick="toggle(this)">R</div><div class="ann-box ann-star" onclick="toggle(this)">★</div></div></td></tr>
+      <tr class="indicator-row"><td class="indicator-name">First post timing (day / time)</td><td class="annotation-cells"><div class="annotation-grid"><div class="ann-box ann-green" onclick="toggle(this)">G</div><div class="ann-box ann-yellow" onclick="toggle(this)">Y</div><div class="ann-box ann-red" onclick="toggle(this)">R</div><div class="ann-box ann-star" onclick="toggle(this)">★</div></div></td></tr>
+      <tr class="indicator-row"><td class="indicator-name">Participation distribution (who posted / who didn't)</td><td class="annotation-cells"><div class="annotation-grid"><div class="ann-box ann-green" onclick="toggle(this)">G</div><div class="ann-box ann-yellow" onclick="toggle(this)">Y</div><div class="ann-box ann-red" onclick="toggle(this)">R</div><div class="ann-box ann-star" onclick="toggle(this)">★</div></div></td></tr>
+      <tr class="indicator-row"><td class="indicator-name">Sentiment analysis of posts <span class="badge">advanced</span></td><td class="annotation-cells"><div class="annotation-grid"><div class="ann-box ann-green" onclick="toggle(this)">G</div><div class="ann-box ann-yellow" onclick="toggle(this)">Y</div><div class="ann-box ann-red" onclick="toggle(this)">R</div><div class="ann-box ann-star" onclick="toggle(this)">★</div></div></td></tr>
+
+      <tr class="section-gap"><td colspan="2"></td></tr>
+
+      <!-- ④ Content Interaction -->
+      <tr class="group-header">
+        <td colspan="2">④ Content Interaction Data <span class="group-sub">How students engage with learning materials</span></td>
+      </tr>
+      <tr class="col-header">
+        <td>Indicator</td>
+        <td><div class="annotation-cols"><span>🟢 Use</span><span>🟡 Unsure</span><span>🔴 Ignore</span><span>★ Wish</span></div></td>
+      </tr>
+      <tr class="indicator-row"><td class="indicator-name">Number of times a resource was accessed</td><td class="annotation-cells"><div class="annotation-grid"><div class="ann-box ann-green" onclick="toggle(this)">G</div><div class="ann-box ann-yellow" onclick="toggle(this)">Y</div><div class="ann-box ann-red" onclick="toggle(this)">R</div><div class="ann-box ann-star" onclick="toggle(this)">★</div></div></td></tr>
+      <tr class="indicator-row"><td class="indicator-name">Video completion rate</td><td class="annotation-cells"><div class="annotation-grid"><div class="ann-box ann-green" onclick="toggle(this)">G</div><div class="ann-box ann-yellow" onclick="toggle(this)">Y</div><div class="ann-box ann-red" onclick="toggle(this)">R</div><div class="ann-box ann-star" onclick="toggle(this)">★</div></div></td></tr>
+      <tr class="indicator-row"><td class="indicator-name">Video pause / replay points <span class="badge">advanced</span></td><td class="annotation-cells"><div class="annotation-grid"><div class="ann-box ann-green" onclick="toggle(this)">G</div><div class="ann-box ann-yellow" onclick="toggle(this)">Y</div><div class="ann-box ann-red" onclick="toggle(this)">R</div><div class="ann-box ann-star" onclick="toggle(this)">★</div></div></td></tr>
+      <tr class="indicator-row"><td class="indicator-name">File / document download count</td><td class="annotation-cells"><div class="annotation-grid"><div class="ann-box ann-green" onclick="toggle(this)">G</div><div class="ann-box ann-yellow" onclick="toggle(this)">Y</div><div class="ann-box ann-red" onclick="toggle(this)">R</div><div class="ann-box ann-star" onclick="toggle(this)">★</div></div></td></tr>
+      <tr class="indicator-row"><td class="indicator-name">Time spent on each page</td><td class="annotation-cells"><div class="annotation-grid"><div class="ann-box ann-green" onclick="toggle(this)">G</div><div class="ann-box ann-yellow" onclick="toggle(this)">Y</div><div class="ann-box ann-red" onclick="toggle(this)">R</div><div class="ann-box ann-star" onclick="toggle(this)">★</div></div></td></tr>
+      <tr class="indicator-row"><td class="indicator-name">Resources never accessed by any student</td><td class="annotation-cells"><div class="annotation-grid"><div class="ann-box ann-green" onclick="toggle(this)">G</div><div class="ann-box ann-yellow" onclick="toggle(this)">Y</div><div class="ann-box ann-red" onclick="toggle(this)">R</div><div class="ann-box ann-star" onclick="toggle(this)">★</div></div></td></tr>
+
+      <tr class="section-gap"><td colspan="2"></td></tr>
+
+      <!-- ⑤ Comparative -->
+      <tr class="group-header">
+        <td colspan="2">⑤ Comparative / Benchmarking Data <span class="group-sub">Contextualizing your course against other sections or semesters</span></td>
+      </tr>
+      <tr class="col-header">
+        <td>Indicator</td>
+        <td><div class="annotation-cols"><span>🟢 Use</span><span>🟡 Unsure</span><span>🔴 Ignore</span><span>★ Wish</span></div></td>
+      </tr>
+      <tr class="indicator-row"><td class="indicator-name">This section vs. previous semesters</td><td class="annotation-cells"><div class="annotation-grid"><div class="ann-box ann-green" onclick="toggle(this)">G</div><div class="ann-box ann-yellow" onclick="toggle(this)">Y</div><div class="ann-box ann-red" onclick="toggle(this)">R</div><div class="ann-box ann-star" onclick="toggle(this)">★</div></div></td></tr>
+      <tr class="indicator-row"><td class="indicator-name">This section vs. concurrent sections</td><td class="annotation-cells"><div class="annotation-grid"><div class="ann-box ann-green" onclick="toggle(this)">G</div><div class="ann-box ann-yellow" onclick="toggle(this)">Y</div><div class="ann-box ann-red" onclick="toggle(this)">R</div><div class="ann-box ann-star" onclick="toggle(this)">★</div></div></td></tr>
+      <tr class="indicator-row"><td class="indicator-name">Individual score vs. class average</td><td class="annotation-cells"><div class="annotation-grid"><div class="ann-box ann-green" onclick="toggle(this)">G</div><div class="ann-box ann-yellow" onclick="toggle(this)">Y</div><div class="ann-box ann-red" onclick="toggle(this)">R</div><div class="ann-box ann-star" onclick="toggle(this)">★</div></div></td></tr>
+      <tr class="indicator-row"><td class="indicator-name">Retention / completion rate across sections</td><td class="annotation-cells"><div class="annotation-grid"><div class="ann-box ann-green" onclick="toggle(this)">G</div><div class="ann-box ann-yellow" onclick="toggle(this)">Y</div><div class="ann-box ann-red" onclick="toggle(this)">R</div><div class="ann-box ann-star" onclick="toggle(this)">★</div></div></td></tr>
+
+      <tr class="section-gap"><td colspan="2"></td></tr>
+
+      <!-- ⑥ Predictive -->
+      <tr class="group-header">
+        <td colspan="2">⑥ Predictive Analytics <span class="group-sub">Forward-looking signals to support early intervention</span></td>
+      </tr>
+      <tr class="col-header">
+        <td>Indicator</td>
+        <td><div class="annotation-cols"><span>🟢 Use</span><span>🟡 Unsure</span><span>🔴 Ignore</span><span>★ Wish</span></div></td>
+      </tr>
+      <tr class="indicator-row"><td class="indicator-name">At-risk student flag</td><td class="annotation-cells"><div class="annotation-grid"><div class="ann-box ann-green" onclick="toggle(this)">G</div><div class="ann-box ann-yellow" onclick="toggle(this)">Y</div><div class="ann-box ann-red" onclick="toggle(this)">R</div><div class="ann-box ann-star" onclick="toggle(this)">★</div></div></td></tr>
+      <tr class="indicator-row"><td class="indicator-name">Early warning alert / notification</td><td class="annotation-cells"><div class="annotation-grid"><div class="ann-box ann-green" onclick="toggle(this)">G</div><div class="ann-box ann-yellow" onclick="toggle(this)">Y</div><div class="ann-box ann-red" onclick="toggle(this)">R</div><div class="ann-box ann-star" onclick="toggle(this)">★</div></div></td></tr>
+      <tr class="indicator-row"><td class="indicator-name">Predicted final grade <span class="badge">advanced</span></td><td class="annotation-cells"><div class="annotation-grid"><div class="ann-box ann-green" onclick="toggle(this)">G</div><div class="ann-box ann-yellow" onclick="toggle(this)">Y</div><div class="ann-box ann-red" onclick="toggle(this)">R</div><div class="ann-box ann-star" onclick="toggle(this)">★</div></div></td></tr>
+      <tr class="indicator-row"><td class="indicator-name">Dropout risk score <span class="badge">advanced</span></td><td class="annotation-cells"><div class="annotation-grid"><div class="ann-box ann-green" onclick="toggle(this)">G</div><div class="ann-box ann-yellow" onclick="toggle(this)">Y</div><div class="ann-box ann-red" onclick="toggle(this)">R</div><div class="ann-box ann-star" onclick="toggle(this)">★</div></div></td></tr>
+      <tr class="indicator-row"><td class="indicator-name">Engagement risk score <span class="badge">advanced</span></td><td class="annotation-cells"><div class="annotation-grid"><div class="ann-box ann-green" onclick="toggle(this)">G</div><div class="ann-box ann-yellow" onclick="toggle(this)">Y</div><div class="ann-box ann-red" onclick="toggle(this)">R</div><div class="ann-box ann-star" onclick="toggle(this)">★</div></div></td></tr>
+
+      <tr class="section-gap"><td colspan="2"></td></tr>
+
+      <!-- ⑦ Progress Tracking -->
+      <tr class="group-header">
+        <td colspan="2">⑦ Progress Tracking <span class="group-sub">Individual learner trajectories through course structure</span></td>
+      </tr>
+      <tr class="col-header">
+        <td>Indicator</td>
+        <td><div class="annotation-cols"><span>🟢 Use</span><span>🟡 Unsure</span><span>🔴 Ignore</span><span>★ Wish</span></div></td>
+      </tr>
+      <tr class="indicator-row"><td class="indicator-name">Module completion rate</td><td class="annotation-cells"><div class="annotation-grid"><div class="ann-box ann-green" onclick="toggle(this)">G</div><div class="ann-box ann-yellow" onclick="toggle(this)">Y</div><div class="ann-box ann-red" onclick="toggle(this)">R</div><div class="ann-box ann-star" onclick="toggle(this)">★</div></div></td></tr>
+      <tr class="indicator-row"><td class="indicator-name">Milestone / checkpoint achievement</td><td class="annotation-cells"><div class="annotation-grid"><div class="ann-box ann-green" onclick="toggle(this)">G</div><div class="ann-box ann-yellow" onclick="toggle(this)">Y</div><div class="ann-box ann-red" onclick="toggle(this)">R</div><div class="ann-box ann-star" onclick="toggle(this)">★</div></div></td></tr>
+      <tr class="indicator-row"><td class="indicator-name">Time taken to complete each module</td><td class="annotation-cells"><div class="annotation-grid"><div class="ann-box ann-green" onclick="toggle(this)">G</div><div class="ann-box ann-yellow" onclick="toggle(this)">Y</div><div class="ann-box ann-red" onclick="toggle(this)">R</div><div class="ann-box ann-star" onclick="toggle(this)">★</div></div></td></tr>
+      <tr class="indicator-row"><td class="indicator-name">Number of overdue / incomplete items</td><td class="annotation-cells"><div class="annotation-grid"><div class="ann-box ann-green" onclick="toggle(this)">G</div><div class="ann-box ann-yellow" onclick="toggle(this)">Y</div><div class="ann-box ann-red" onclick="toggle(this)">R</div><div class="ann-box ann-star" onclick="toggle(this)">★</div></div></td></tr>
+      <tr class="indicator-row"><td class="indicator-name">Overall course progress view (all students)</td><td class="annotation-cells"><div class="annotation-grid"><div class="ann-box ann-green" onclick="toggle(this)">G</div><div class="ann-box ann-yellow" onclick="toggle(this)">Y</div><div class="ann-box ann-red" onclick="toggle(this)">R</div><div class="ann-box ann-star" onclick="toggle(this)">★</div></div></td></tr>
+
+      <tr class="section-gap"><td colspan="2"></td></tr>
+
+      <!-- ⑧ Supplementary -->
+      <tr class="group-header">
+        <td colspan="2">⑧ Assignment Behavior &amp; Feedback <span class="group-sub">How students manage and respond to assignments and instructor feedback</span></td>
+      </tr>
+      <tr class="col-header">
+        <td>Indicator</td>
+        <td><div class="annotation-cols"><span>🟢 Use</span><span>🟡 Unsure</span><span>🔴 Ignore</span><span>★ Wish</span></div></td>
+      </tr>
+      <tr class="indicator-row"><td class="indicator-name">Submission timing (early / on-time / late)</td><td class="annotation-cells"><div class="annotation-grid"><div class="ann-box ann-green" onclick="toggle(this)">G</div><div class="ann-box ann-yellow" onclick="toggle(this)">Y</div><div class="ann-box ann-red" onclick="toggle(this)">R</div><div class="ann-box ann-star" onclick="toggle(this)">★</div></div></td></tr>
+      <tr class="indicator-row"><td class="indicator-name">Late submission rate (class-wide)</td><td class="annotation-cells"><div class="annotation-grid"><div class="ann-box ann-green" onclick="toggle(this)">G</div><div class="ann-box ann-yellow" onclick="toggle(this)">Y</div><div class="ann-box ann-red" onclick="toggle(this)">R</div><div class="ann-box ann-star" onclick="toggle(this)">★</div></div></td></tr>
+      <tr class="indicator-row"><td class="indicator-name">Number of resubmissions / revisions</td><td class="annotation-cells"><div class="annotation-grid"><div class="ann-box ann-green" onclick="toggle(this)">G</div><div class="ann-box ann-yellow" onclick="toggle(this)">Y</div><div class="ann-box ann-red" onclick="toggle(this)">R</div><div class="ann-box ann-star" onclick="toggle(this)">★</div></div></td></tr>
+      <tr class="indicator-row"><td class="indicator-name">Feedback read / opened record <span class="badge">advanced</span></td><td class="annotation-cells"><div class="annotation-grid"><div class="ann-box ann-green" onclick="toggle(this)">G</div><div class="ann-box ann-yellow" onclick="toggle(this)">Y</div><div class="ann-box ann-red" onclick="toggle(this)">R</div><div class="ann-box ann-star" onclick="toggle(this)">★</div></div></td></tr>
+      <tr class="indicator-row"><td class="indicator-name">Time spent reading feedback <span class="badge">advanced</span></td><td class="annotation-cells"><div class="annotation-grid"><div class="ann-box ann-green" onclick="toggle(this)">G</div><div class="ann-box ann-yellow" onclick="toggle(this)">Y</div><div class="ann-box ann-red" onclick="toggle(this)">R</div><div class="ann-box ann-star" onclick="toggle(this)">★</div></div></td></tr>
+
+      <tr class="section-gap"><td colspan="2"></td></tr>
+
+      <!-- ★ Wish items -->
+      <tr class="group-header">
+        <td colspan="2">★ Your Own — Data You Wish You Had <span class="group-sub">If you could see any data not listed above, what would it be?</span></td>
+      </tr>
+      <tr class="wish-row">
+        <td colspan="2" style="padding: 10px 14px;">
+          <div style="display:flex; flex-direction:column; gap:10px;">
+            <div style="display:flex; align-items:center; gap:10px; font-size:12px; color:#7b4c00;">
+              <span style="min-width:16px;">★</span>
+              <input class="wish-input" placeholder="Describe the data you wish you had...">
+              <span style="font-size:11px; color:#aaa; min-width:180px;">→ What decision would it inform?</span>
+              <input class="wish-input" style="flex:1;" placeholder="Write here...">
+            </div>
+            <div style="display:flex; align-items:center; gap:10px; font-size:12px; color:#7b4c00;">
+              <span style="min-width:16px;">★</span>
+              <input class="wish-input" placeholder="Describe the data you wish you had...">
+              <span style="font-size:11px; color:#aaa; min-width:180px;">→ What decision would it inform?</span>
+              <input class="wish-input" style="flex:1;" placeholder="Write here...">
+            </div>
+            <div style="display:flex; align-items:center; gap:10px; font-size:12px; color:#7b4c00;">
+              <span style="min-width:16px;">★</span>
+              <input class="wish-input" placeholder="Describe the data you wish you had...">
+              <span style="font-size:11px; color:#aaa; min-width:180px;">→ What decision would it inform?</span>
+              <input class="wish-input" style="flex:1;" placeholder="Write here...">
+            </div>
+          </div>
+        </td>
+      </tr>
+
+    </tbody></table>
+
+  </div><!-- end body -->
+
+  <!-- Footer -->
+  <div class="page-footer">
+    <div class="participant-id">Participant ID: <input placeholder="e.g. P-01"></div>
+    <div>LA Interview Study — Annotation Stimulus Sheet</div>
+    <div>🟢 G &nbsp; 🟡 Y &nbsp; 🔴 R &nbsp; ★</div>
+  </div>
+
+</div><!-- end page -->
+
+<script>
+  function toggle(el) {
+    const typeMap = {
+      'ann-green': 'active-green',
+      'ann-yellow': 'active-yellow',
+      'ann-red': 'active-red',
+      'ann-star': 'active-star'
+    };
+    for (const [cls, active] of Object.entries(typeMap)) {
+      if (el.classList.contains(cls)) {
+        el.classList.toggle(active);
+        break;
+      }
+    }
+  }
+</script>
+
+
+
+</body></html>Ytext/htmlP    ( 7 U g } � � �{�{�                           {�
